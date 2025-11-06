@@ -7,7 +7,6 @@ use crate::hash::*;
 #[derive(Deserialize)]
 pub struct SignupPayload{
     username : String,
-    userid : u64,
     password : String
 }
 pub async fn signup(data : web::Data<AppState> , payload : web::Json<SignupPayload>) -> impl Responder {
@@ -15,7 +14,7 @@ pub async fn signup(data : web::Data<AppState> , payload : web::Json<SignupPaylo
     let req = Request::Signup { 
         username: payload.username.clone(), 
         password: hash_password(&payload.password), 
-        userid:payload.userid, resp: tx 
+        resp: tx 
     };
     if let Err(_) = data.worker.send(req).await {
         return HttpResponse::InternalServerError().body("Background worker creashed");
