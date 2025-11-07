@@ -6,7 +6,7 @@ use serde::Deserialize;
 
 #[derive(Deserialize)]
 pub struct SigninPayload{
-    username : String,
+    username : String, // Each username has to be unique
     password : String
 }
 

@@ -6,7 +6,7 @@ use crate::hash::*;
 
 #[derive(Deserialize)]
 pub struct SignupPayload{
-    username : String,
+    username : String, // Username should be unique
     password : String
 }
 
