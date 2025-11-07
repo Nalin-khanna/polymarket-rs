@@ -13,7 +13,7 @@ struct MarketOrderPayload {
     ordertype : Ordertype,
 }
 
-#[post("/limitorder")]
+#[post("/marketorder")]
 pub async fn create_market_order(data : web::Data<AppState> , payload : web::Json<MarketOrderPayload>) -> impl Responder {
     let (tx , mut rx) = oneshot::channel::<Result<String,String>>();
     let req = Request::CreateMarketOrder { 
