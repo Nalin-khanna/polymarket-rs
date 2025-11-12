@@ -53,6 +53,10 @@ pub enum Request {
     UserDetails{
         username : String ,
         resp: oneshot::Sender<Result<UserDetails, String>>,
+    },
+    GetOrderbook{
+        market_id : String,
+        resp: oneshot::Sender<Result<Orderbooks, String>>,
     }
 }
 
@@ -60,4 +64,10 @@ pub enum Request {
 pub struct UserDetails{
     pub balance : u64,
     pub holdings : HashMap<String ,UserHoldings > 
+}
+
+#[derive(Debug , Serialize )]
+pub struct Orderbooks{
+    pub stock_a : OrderBook,
+    pub stock_b : OrderBook
 }

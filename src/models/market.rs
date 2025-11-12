@@ -34,7 +34,7 @@ impl Market {
         };
         market
     }
-    pub fn add_limit_order(&mut self , order : Order , user : &mut User) -> Result<Vec<Trade> , String> {
+    pub fn add_limit_order(&mut self , mut order : Order , user : &mut User) -> Result<Vec<Trade> , String> {
         match order.stock_type {
             StockType::StockA => { 
                 let mut v  =  self.stock_a.add_limit_order(order, user);

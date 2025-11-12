@@ -10,5 +10,5 @@ serde = "1.0.228"
 tokio = { version = "1", features = ["full"] }
 bcrypt = "0.15"
 nanoid = "0.4.0"
-chrono = "0.4.42"
+chrono = {version = "0.4.42" , features = ["serde"]}
 jsonwebtoken = { version = "10", features = ["aws_lc_rs"] }

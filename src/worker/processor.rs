@@ -316,6 +316,17 @@ pub fn spawn_background_worker() -> mpsc::Sender<(Request)> {
                                 }
                              };
                         }
+                        Request::GetOrderbook { market_id
+                            , resp
+                         } => {
+                            let market = markets.get(&market_id) ;
+                            if market.is_none() {
+                                let _ = resp.send(Err("Market does not exists".to_string()));
+                                continue;
+                            }
+                            let market = market.unwrap();
+                            let _ = resp.send(Ok(Orderbooks { stock_a: market.stock_a.clone(), stock_b: market.stock_b.clone()}));
+                         }
                     }
                 }
                 None => break,

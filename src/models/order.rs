@@ -1,11 +1,11 @@
 
 use chrono::{DateTime, Utc};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use std::collections::{ BTreeMap , VecDeque};
 
 use crate::User;
 
-#[derive(Debug , Clone )]
+#[derive(Debug , Clone  , Serialize )]
 pub struct Order {
    pub price : u64, 
    pub quantity : u64,
@@ -23,20 +23,20 @@ pub struct Trade {
     pub trade_price : u64 ,
     pub stock_type : StockType
 }
-#[derive(Debug , Clone , PartialEq, Hash, Eq , Deserialize)]
+#[derive(Debug , Clone , PartialEq, Hash, Eq , Deserialize , Serialize)]
 pub enum StockType {
     StockA,
     StockB 
 }
-#[derive(Debug , Clone , Deserialize)]
+#[derive(Debug , Clone , Deserialize , Serialize)]
 pub enum Ordertype{
     Buy,
     Sell
 }
-#[derive(Debug)]
+#[derive(Debug, Serialize , Clone)]
 pub struct OrderBook {
-    buy: BTreeMap<u64, VecDeque<Order>>,
-    sell: BTreeMap<u64, VecDeque<Order>>,
+    pub buy: BTreeMap<u64, VecDeque<Order>>,
+    pub sell: BTreeMap<u64, VecDeque<Order>>,
 }
 impl OrderBook {
     pub fn new () -> Self{
